@@ -6,9 +6,10 @@
  * Time: 14:24
  */
 
+require_once("View.php");
 require_once(__ROOT__."/Model/UserModel.php");
 require_once(__ROOT__."/View/ListUsersView.php");
-class ListUsersView {
+class ListUsersView extends View{
     public function compactList(UserList $userlist){
         $users = $userlist->getUserList();
         if($users){
@@ -114,7 +115,4 @@ class ListUsersView {
         return $result;
     }
 
-    public function getRequestMethod(){
-        return $_SERVER["REQUEST_METHOD"];
-    }
 }

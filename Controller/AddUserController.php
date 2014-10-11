@@ -17,7 +17,7 @@ class AddUserController {
         $this->userList = new UserList();
     }
     public function getHTML(){
-        if($_SERVER["REQUEST_METHOD"] === "POST"){
+        if($this->view->getRequestMethod() === "POST"){
             $tempUser = new User($this->view->getFirstname(),$this->view->getLastname(),$this->view->getSSN());
             $this->userList->addUser($tempUser);
             $this->userList->saveUsers();

@@ -5,7 +5,9 @@
  * Date: 2014-10-01
  * Time: 14:11
  */
-class CreateView {
+
+require_once("View.php");
+class CreateView extends View{
     public function getFirstname(){
         return $_POST["firstname"];
     }
@@ -14,14 +16,6 @@ class CreateView {
     }
     public function getSSN(){
         return $_POST["ssn"];
-    }
-    public function redirect(){
-        header("Location: "."/Workshop2/user/");
-        exit;
-    }
-
-    public function getRequestMethod(){
-        return $_SERVER["REQUEST_METHOD"];
     }
     public function getCreateView(){
         $html = '<form method="post">

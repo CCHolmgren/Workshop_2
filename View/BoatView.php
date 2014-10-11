@@ -6,15 +6,12 @@
  * Time: 13:45
  */
 require_once("ListUsersView.php");
+require_once("View.php");
 
-class BoatView{
+class BoatView extends View{
     private $listusersview;
     public function __construct(){
         $this->listusersview = new ListUsersView();
-    }
-    public function redirect(){
-        header("Location: "."/Workshop2/user/");
-        exit;
     }
     public function getMethod(){
         if(isset($_GET["method"]))
@@ -82,9 +79,5 @@ class BoatView{
     public function getDefaultView(){
         $html = "Hello you are in the default view. Here I should maybe use the boatListInfo in the ListUsersView so that I do not have to do things again. Maybe?";
         return $html;
-    }
-
-    public function getRequestMethod(){
-        return $_SERVER["REQUEST_METHOD"];
     }
 }

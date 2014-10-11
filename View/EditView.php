@@ -5,7 +5,9 @@
  * Date: 2014-10-01
  * Time: 14:11
  */
-class EditView {
+
+require_once("View.php");
+class EditView extends View{
     public function getEditView(User $user){
         $html = "
         <form method='post'>
@@ -16,13 +18,5 @@ class EditView {
                 </form>
         ";
         return $html;
-    }
-
-    public function getRequestMethod(){
-        return $_SERVER["REQUEST_METHOD"];
-    }
-    public function redirect(){
-        header("Location: "."/Workshop2/user/");
-        exit;
     }
 }

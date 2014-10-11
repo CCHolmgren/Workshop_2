@@ -5,7 +5,9 @@
  * Date: 2014-10-01
  * Time: 14:11
  */
-class RemoveView {
+
+require_once("View.php");
+class RemoveView extends View{
     public function getRemoveView(User $user){
         $html = "
         <form method='post'>
@@ -15,14 +17,6 @@ class RemoveView {
         </form>
         ";
         return $html;
-    }
-
-    public function getRequestMethod(){
-        return $_SERVER["REQUEST_METHOD"];
-    }
-    public function redirect(){
-        header("Location: "."/Workshop2/user/");
-        exit;
     }
     public function isSure(){
         return isset($_POST["totallysure"]);
