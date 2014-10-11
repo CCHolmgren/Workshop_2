@@ -83,4 +83,8 @@ class BoatView{
         $html = "Hello you are in the default view. Here I should maybe use the boatListInfo in the ListUsersView so that I do not have to do things again. Maybe?";
         return $html;
     }
+
+    public function getRequestMethod(){
+        return $_SERVER["REQUEST_METHOD"];
+    }
 }

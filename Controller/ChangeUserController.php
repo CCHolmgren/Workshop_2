@@ -22,15 +22,13 @@ class ChangeUserController {
         $userRepository = new UserRepository();
 
         $member = $userRepository->getUserById($membernumber);
-        if($_SERVER["REQUEST_METHOD"] === "POST"){
-            //$tempUser = new User($_POST["firstname"],$_POST["lastname"],$_POST["ssn"],$member->membernumber);
+        if($this->view->getRequestMethod() === "POST"){
             $member->firstname = $_POST["firstname"];
             $member->lastname = $_POST["lastname"];
             $member->ssn = $_POST["ssn"];
             $this->userList->editUser($member);
             $this->userList->saveUsers();
-            header("Location: "."/Workshop2/user/");
-            exit;
+            $this->view->redirect();
         }
         return $this->view->getEditView($member);
     }

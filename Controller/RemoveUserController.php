@@ -20,13 +20,9 @@ class RemoveUserController {
         $userRepository = new UserRepository();
         $user = $userRepository->getUserById($_GET["userid"]);
 
-        if($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["totallysure"])){
-            $userRepository = new UserRepository();
-            $user = $userRepository->getUserById($_POST["membernumber"]);
+        if($this->view->getRequestMethod() === "POST" && $this->view->isSure()){
             $this->userList->removeUser($user);
             $this->userList->saveUsers();
-            header("Location: "."/Workshop2/user/");
-            exit;
         }
         return $this->view->getRemoveView($user);
     }

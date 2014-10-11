@@ -113,4 +113,8 @@ class ListUsersView {
         $result .= $this->fullList($allMembers);
         return $result;
     }
+
+    public function getRequestMethod(){
+        return $_SERVER["REQUEST_METHOD"];
+    }
 }

@@ -17,4 +17,12 @@ class EditView {
         ";
         return $html;
     }
+
+    public function getRequestMethod(){
+        return $_SERVER["REQUEST_METHOD"];
+    }
+    public function redirect(){
+        header("Location: "."/Workshop2/user/");
+        exit;
+    }
 }

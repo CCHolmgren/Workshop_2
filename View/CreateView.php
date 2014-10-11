@@ -19,6 +19,10 @@ class CreateView {
         header("Location: "."/Workshop2/user/");
         exit;
     }
+
+    public function getRequestMethod(){
+        return $_SERVER["REQUEST_METHOD"];
+    }
     public function getCreateView(){
         $html = '<form method="post">
                 <input type="text" name="firstname" placeholder="Firstname">

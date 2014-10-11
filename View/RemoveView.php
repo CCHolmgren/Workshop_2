@@ -16,4 +16,18 @@ class RemoveView {
         ";
         return $html;
     }
+
+    public function getRequestMethod(){
+        return $_SERVER["REQUEST_METHOD"];
+    }
+    public function redirect(){
+        header("Location: "."/Workshop2/user/");
+        exit;
+    }
+    public function isSure(){
+        return isset($_POST["totallysure"]);
+    }
+    public function getUserID(){
+        return $_POST["membernumber"];
+    }
 }

@@ -20,7 +20,7 @@ class BoatController {
         $userid = $this->view->getUserID();
         $member = $this->userList->getUserById($userid);
 
-        if($_SERVER["REQUEST_METHOD"] === "POST"){
+        if($this->view->getRequestMethod() === "POST"){
             $length = $this->view->getLength();
             $boattype = $this->view->getBoattype();
 
