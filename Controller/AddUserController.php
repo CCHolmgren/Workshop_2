@@ -18,11 +18,10 @@ class AddUserController {
     }
     public function getHTML(){
         if($_SERVER["REQUEST_METHOD"] === "POST"){
-            $tempUser = new User($_POST["firstname"],$_POST["lastname"],$_POST["ssn"]);
+            $tempUser = new User($this->view->getFirstname(),$this->view->getLastname(),$this->view->getSSN());
             $this->userList->addUser($tempUser);
             $this->userList->saveUsers();
-            header("Location: "."/Workshop2/user/");
-            exit;
+            $this->view->redirect();
         }
         return $this->view->getCreateView();
     }

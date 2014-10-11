@@ -21,25 +21,27 @@ class BoatController {
         $member = $this->userList->getUserById($userid);
 
         if($_SERVER["REQUEST_METHOD"] === "POST"){
+            $length = $this->view->getLength();
+            $boattype = $this->view->getBoattype();
+
             if($this->view->getMethod() === "add"){
-                $tempBoat = new Boat($_POST["length"],$_POST["boattype"]);
+                $tempBoat = new Boat($length, $boattype);
 
                 $member->addBoat($tempBoat);
             }
             if($this->view->getMethod() === "edit"){
-                $oldBoat = new Boat($_POST["oldLength"], $_POST["oldBoattype"]);
-                $newBoat = new Boat($_POST["length"], $_POST["boattype"]);
+                $oldBoat = new Boat($this->view->getOldLength(), $this->view->getOldBoattype());
+                $newBoat = new Boat($length, $boattype);
 
                 $member->editBoat($oldBoat, $newBoat);
             }
             if($this->view->getMethod() === "remove"){
-                $tempBoat = new Boat($_POST["length"], $_POST["boattype"]);
+                $tempBoat = new Boat($length, $boattype);
 
                 $member->removeBoat($tempBoat);
             }
             $this->userList->saveUsers();
-            header("Location: "."/Workshop2/user/");
-            exit;
+            $this->view->redirect();
         }
         switch($this->view->getMethod()){
             case "add":

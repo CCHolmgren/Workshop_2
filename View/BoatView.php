@@ -12,6 +12,10 @@ class BoatView{
     public function __construct(){
         $this->listusersview = new ListUsersView();
     }
+    public function redirect(){
+        header("Location: "."/Workshop2/user/");
+        exit;
+    }
     public function getMethod(){
         if(isset($_GET["method"]))
             return $_GET["method"];
