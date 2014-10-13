@@ -32,7 +32,8 @@ class BoatController {
             if($this->view->getMethod() === "edit"){
                 $oldBoat = new Boat($this->view->getOldLength(), $this->view->getOldBoattype());
                 $newBoat = new Boat($length, $boattype);
-
+                var_dump($oldBoat);
+                var_dump($newBoat);
                 $member->editBoat($oldBoat, $newBoat);
             }
             if($this->view->getMethod() === "remove"){

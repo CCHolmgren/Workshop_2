@@ -13,8 +13,8 @@ class UserRepository{
      * @return mixed|UserList
      */
     public function getAllUsers(){
-        if(file_exists("C:/Users/Chrille/PhpstormProjects/Workshop_2/Users.txt")){
-            $filecontents = file_get_contents("C:/Users/Chrille/PhpstormProjects/Workshop_2/Users.txt");
+        if(file_exists(__ROOT__."Users.txt")){
+            $filecontents = file_get_contents(__ROOT__."Users.txt");
             $userList = unserialize($filecontents);
         }
         else {
@@ -28,8 +28,8 @@ class UserRepository{
      * @return User
      */
     public function getUserById($id){
-        if(file_exists("C:/Users/Chrille/PhpstormProjects/Workshop_2/Users.txt")){
-            $filecontents = file_get_contents("C:/Users/Chrille/PhpstormProjects/Workshop_2/Users.txt");
+        if(file_exists(__ROOT__."Users.txt")){
+            $filecontents = file_get_contents(__ROOT__."Users.txt");
             $userList = unserialize($filecontents);
             foreach($userList->getUserList() as $user){
                 if($user->membernumber == $id){
@@ -105,7 +105,7 @@ class UserList{
         }
     }
     public function saveUsers(){
-        file_put_contents("C:/Users/Chrille/PhpstormProjects/Workshop_2/Users.txt", serialize($this));
+        file_put_contents(__ROOT__."Users.txt", serialize($this));
     }
 }
 class User {
@@ -140,8 +140,9 @@ class User {
     }
     public function editBoat(Boat $oldBoatInfo, Boat $newBoatInfo){
         foreach($this->boats as $key=>$value){
-            if($this->value->length === $oldBoatInfo->getLength() && $this->value->boattype === $oldBoatInfo->getBoatType()){
-                array_splice($this->boats,$key, 1,$newBoatInfo);
+            if($value->getLength() === $oldBoatInfo->getLength() && $value->getBoatType() === $oldBoatInfo->getBoatType()){
+                unset($this->boats[$key]);
+                $this->boats[$key] = $newBoatInfo;
                 return true;
             }
         }
@@ -149,7 +150,7 @@ class User {
     }
     public function removeBoat(Boat $boat){
         foreach($this->boats as $key=>$value){
-            if($value->length === $boat->getLength() && $value->boattype === $boat->getBoatType()){
+            if($value->getLength() === $boat->getLength() && $value->getBoatType() === $boat->getBoatType()){
                 array_splice($this->boats,$key, 1);
                 return true;
             }

@@ -117,7 +117,8 @@ class ListUsersView extends View{
                         </thead>
                         <tbody>";
         /** @var Boat $boat */
-        foreach($user->boats as $key=>$boat){
+        foreach($user->boats as $boat){
+            var_dump($boat);
             $result .= "<tr>";
             $result .= "<td>" .
                             $boat->getLength() .

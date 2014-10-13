@@ -40,10 +40,10 @@ class BoatView extends View{
         return htmlspecialchars($_GET["boattype"]);
     }
     public function getOldLength(){
-        return htmlspecialchars($_GET["oldlength"]);
+        return htmlspecialchars($_GET["length"]);
     }
     public function getOldBoattype(){
-        return htmlspecialchars($_GET["oldboattype"]);
+        return htmlspecialchars($_GET["boattype"]);
     }
     public function getAddView(){
         $html = "
