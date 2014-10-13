@@ -6,6 +6,7 @@
  * Time: 10:17
  */
 session_start();
+define("__ROOT__","C:/Users/Chrille/PhpstormProjects/Workshop_2/");
 require_once("Model/BoatModel.php");
 require_once("Model/UserModel.php");
 require_once("View/ListUsersView.php");

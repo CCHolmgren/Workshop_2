@@ -140,7 +140,7 @@ class User {
     }
     public function editBoat(Boat $oldBoatInfo, Boat $newBoatInfo){
         foreach($this->boats as $key=>$value){
-            if($this->value->length === $oldBoatInfo->length && $this->value->boattype === $oldBoatInfo->boattype){
+            if($this->value->length === $oldBoatInfo->getLength() && $this->value->boattype === $oldBoatInfo->getBoatType()){
                 array_splice($this->boats,$key, 1,$newBoatInfo);
                 return true;
             }
@@ -149,7 +149,7 @@ class User {
     }
     public function removeBoat(Boat $boat){
         foreach($this->boats as $key=>$value){
-            if($value->length === $boat->length && $value->boattype === $boat->boattype){
+            if($value->length === $boat->getLength() && $value->boattype === $boat->getBoatType()){
                 array_splice($this->boats,$key, 1);
                 return true;
             }

@@ -23,6 +23,7 @@ class RemoveUserController {
         if($this->view->getRequestMethod() === "POST" && $this->view->isSure()){
             $this->userList->removeUser($user);
             $this->userList->saveUsers();
+            $this->view->redirect();
         }
         return $this->view->getRemoveView($user);
     }

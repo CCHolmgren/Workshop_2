@@ -10,6 +10,10 @@ require_once("View.php");
 require_once(__ROOT__."/Model/UserModel.php");
 require_once(__ROOT__."/View/ListUsersView.php");
 class ListUsersView extends View{
+    /**
+     * @param UserList $userlist The users that we should generate the table for
+     * @return string Table containing all users and the data
+     */
     public function compactList(UserList $userlist){
         $users = $userlist->getUserList();
         if($users){
@@ -33,16 +37,34 @@ class ListUsersView extends View{
         }
         return "<p>There seems to be no users added yet and as such the compact list is not available</p>";
     }
-    public function generateTableRow(User $user, $method = "countUsersBoats", $getAllMethods = true, $printOutSSN = false){
+
+    /**
+     * @param User $user The user to display data from
+     * @param string $method A method that returns a string, that will be used to generate a cell in the table
+     * @param bool $generateCRDLinks Generate Create Read Delete links
+     * @param bool $printOutSSN Print out the SSN of the user
+     * @return string Table row containing the $user data
+     */
+    public function generateTableRow(User $user, $method = "countUsersBoats", $generateCRDLinks = true, $printOutSSN = false){
         $result = "<tr>
-                    <td>" . $user->firstname . "</td>
-                    <td>" . $user->lastname . "</td>
-                    <td>" . $user->membernumber . "</td>";
+                    <td>" .
+                        $user->firstname .
+                    "</td>
+                    <td>" .
+                        $user->lastname .
+                    "</td>
+                    <td>" .
+                        $user->membernumber .
+                    "</td>";
         if($method !== "")
-            $result .= "<td>" . $user->$method() . "</td>";
+            $result .= "<td>" .
+                            $user->$method() .
+                        "</td>";
         if($printOutSSN)
-            $result .= "<td>" . $user->getSSN() . "</td>";
-        if($getAllMethods){
+            $result .= "<td>" .
+                            $user->getSSN() .
+                        "</td>";
+        if($generateCRDLinks){
             $result .= "
                     <td><a href=./change/?userid=" . $user->membernumber . ">Change</a></td>
                     <td><a href=./remove/?userid=" . $user->membernumber . ">Remove</a></td>
@@ -51,17 +73,37 @@ class ListUsersView extends View{
         $result .= "</tr>";
         return $result;
     }
-    public function fullList(UserList $userss){
-        $users = $userss->getUserList();
+
+    /**
+     * @param UserList $userlist The users to display data from
+     * @return string An ugly list of people and their boats
+     */
+    public function fullList(UserList $userlist){
+        $users = $userlist->getUserList();
         if($users){
             $result = "";
             foreach($users as $user){
-                $result .= $user->firstname . " " . $user->lastname . " " . $user->ssn . " " . $user->membernumber . " " . $this->boatListInfo($user) . "<a href='./boat/?userid={$user->membernumber}'>Ändra båtar</a><br>";
+                $result .= $user->firstname .
+                    " " .
+                    $user->lastname .
+                    " " .
+                    $user->ssn .
+                    " " .
+                    $user->membernumber .
+                    " " .
+                    $this->boatListInfo($user);
+                    /* .
+                    "<a href='./boat/?userid={$user->membernumber}'>Ändra båtar</a><br>";*/
             }
             return $result;
         }
         return "<p>There seems to be no users added yet and as such the full list is not available</p>";
     }
+
+    /**
+     * @param User $user The user of which we will generate a table to display the boats form
+     * @return string Table containing all the boats of the user
+     */
     public function boatListInfo(User $user){
         $result = "";
         $result .= "<a href='/Workshop2/user/boat/?userid=$user->membernumber&method=add'>Add boat</a><br>";
@@ -74,12 +116,24 @@ class ListUsersView extends View{
                             </tr>
                         </thead>
                         <tbody>";
+        /** @var Boat $boat */
         foreach($user->boats as $key=>$boat){
             $result .= "<tr>";
-            $result .= "<td>".$boat->length . "</td><td>" . $boat->boattype."</td>";
+            $result .= "<td>" .
+                            $boat->getLength() .
+                        "</td>" .
+                        "<td>" .
+                            $boat->getBoatType() .
+                        "</td>";
 
-            $result .= "<td><a href='/Workshop2/user/boat/?userid=$user->membernumber&method=remove&length=$boat->length&boattype=$boat->boattype'>Remove boat</a></td>";
-            $result .= "<td><a href='/Workshop2/user/boat/?userid=$user->membernumber&method=edit&length=$boat->length&boattype=$boat->boattype'>Change boat</a></td>";
+            $result .= "<td>
+                            <a href='/Workshop2/user/boat/?userid=$user->membernumber&method=remove&length={$boat->getLength()}&boattype={$boat->getBoatType()}'>
+                            Remove boat</a>
+                        </td>";
+            $result .= "<td>
+                            <a href='/Workshop2/user/boat/?userid=$user->membernumber&method=edit&length={$boat->getLength()}&boattype={$boat->getBoatType()}'>
+                            Change boat</a>
+                        </td>";
             $result .= "</tr>";
         }
         $result .= "</tbody></table>";

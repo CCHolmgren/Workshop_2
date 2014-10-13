@@ -25,8 +25,8 @@ class BoatList{
     }
 }
 class Boat {
-    public $length;
-    public $boattype;
+    private $length;
+    private $boattype;
 
     public function __construct($length, $boattype){
         $this->length = $length;
